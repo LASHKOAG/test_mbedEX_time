@@ -18,7 +18,19 @@
  * limitations under the License.
  */
 #include "mbed.h"
+#include <iostream>
 
+int main ()
+{
+  time_t rawtime;
+ 
+  time ( &rawtime ); // текущая дата в секундах
+  std::cout << "Текущее локальное время и дата: "
+            <<  ctime (&rawtime); // текущая дата в понятной для человека форме
+ 
+  return 0;
+}
+/*
 int main() {
     set_time(1256729737);  // Set RTC time to Wed, 28 Oct 2009 11:35:37
 
@@ -36,3 +48,4 @@ int main() {
         wait(1);
     }
 }
+*/
