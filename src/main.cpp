@@ -3,7 +3,7 @@
 #include "mbed.h"
 #include <string>
 #include <iostream>
-void write_rtc(std::string& input){
+void write_rtc(std::string& input, int utc){
     //printf("YYYY MM DD HH MM SS[enter]\n");
     struct tm t;
     
@@ -27,6 +27,13 @@ void write_rtc(std::string& input){
     */
 }
 
+void write_rtc2(time_t t, int utc){
+    //printf("YYYY MM DD HH MM SS[enter]\n");
+    struct tm tm;
+    tm = *(utc ? gmtime(&t) : localtime(&t));
+    set_time(mktime(&tm));
+}
+
 void read_rtc(){
     time_t seconds = time(NULL);
     printf("Time as a basic string = %s", ctime(&seconds));
@@ -40,7 +47,8 @@ void read_rtc(){
 int main() {
         char text[100]="2020.03.06 14.25.32";
         std::string text2="2020.03.06 14.25.32";
-    write_rtc(text2);
+    // write_rtc(text2, 0);
+    write_rtc2(1583484257, 0);
         // display the time
 
     while(1) {    
